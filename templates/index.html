@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Trading Strategy Builder</h1>
-    <form method="POST" action="/">
+    <form id="selectionForm" method="POST" action="/">
         <select name="country" id="country-select">
             {% for country in countries %}
             <option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>{{ country }}</option>
@@ -19,11 +19,18 @@
             <option value="{{ sector }}" {% if sector == selected_sector %}selected{% endif %}>{{ sector }}</option>
             {% endfor %}
         </select>
-        <button type="submit">Refresh</button>
     </form>
     <div id="table-container">
         {{ table | safe }}
     </div>
-    <script src="scripts.js"></script>
+    <script>
+        document.getElementById('country-select').addEventListener('change', function() {
+            document.getElementById('selectionForm').submit();
+        });
+    
+        document.getElementById('sector-select').addEventListener('change', function() {
+            document.getElementById('selectionForm').submit();
+        });
+    </script>
 </body>
 </html>
